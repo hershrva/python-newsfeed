@@ -21,16 +21,23 @@ def dash():
     loggedIn=session.get('loggedIn')
   )
 
-@bp.route('/edit/<id>')
+@bp.route('/edit/<int:id>')
 @login_required
 def edit(id):
-  # get single post by id
-  db = get_db()
-  post = db.query(Post).filter(Post.id == id).one()
+    db = get_db()
+    post = db.query(Post).filter(Post.id == id).one()
 
-  # render edit page
-  return render_template(
-    'edit-post.html',
-    post=post,
-    loggedIn=session.get('loggedIn')
-  )
+    # Debugging to check types
+    if not isinstance(post.vote_count, int):
+        print(f"Type of post.vote_count: {type(post.vote_count)}")
+        raise TypeError("vote_count should be an integer")
+    if not isinstance(post.comments, list):
+        raise TypeError("comments should be a list")
+
+    # render edit page
+    return render_template(
+        'edit-post.html',
+        post=post,
+        loggedIn=session.get('loggedIn', False)
+    )
+
