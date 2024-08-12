@@ -146,6 +146,7 @@ def signup():
   db = get_db()
 
   try:
+    print("Incoming data:", data)
     # attempt creating a new user
     newUser = User(
       username = data['username'],

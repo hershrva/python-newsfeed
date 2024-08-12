@@ -16,18 +16,16 @@ class User(Base):
   def validate_email(self, key, email):
     # make sure email address contains @ character
     assert '@' in email
-
     return email
   
   @validates('password')
   def validate_password(self, key, password):
     assert len(password) > 4
+    # encrypt password and return the hashed version
+    return bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')
 
   def verify_password(self, password):
     return bcrypt.checkpw(
       password.encode('utf-8'),
       self.password.encode('utf-8')
     )
-
-    # encrypt password
-    return bcrypt.hashpw(password.encode('utf-8'), salt)
