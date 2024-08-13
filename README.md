@@ -29,7 +29,7 @@ Upon profile creation, users can create, comment and upvote on different posts.
 https://just-tech-newsfeed-f77d601f47c2.herokuapp.com/
 
 ## Usage
-![alt text="Screenshot"](./screenshot.JPG)
+![alt text="Screenshot"](assets/screenshot.png)
 
 ## Technologies
 * Flask https://pypi.org/project/Flask/
